@@ -64,7 +64,7 @@ public class Worker implements Runnable {
                     .header("Host", "book.douban.com")
                     .header("Referer", "https://book.douban.com/")
                     .header("Upgrade-Insecure-Requests", "1")
-                    .header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36")
+                    .header("User-Agent", UserAgent.getUserAgent())
                     .get();
             //按照class获取封面图片所在的a标签
             elements = doc.getElementsByClass("nbg");
@@ -74,8 +74,8 @@ public class Worker implements Runnable {
                 String imageURL = elements.first().attr("href");
                 dbConn.saveRecord(isbn, imageURL);
                 status = 1;
-                //等待1.5秒
-                Thread.sleep(1500);
+                //等待4秒
+                Thread.sleep(4000);
             }
         } catch (Exception e) {
             //e.printStackTrace();

@@ -1,6 +1,3 @@
-# douban-cover-crawler
-Get cover link from douban.
-
 # 根据ISBN获取图书封面图片
 
 ## 一、描述
@@ -28,15 +25,7 @@ MariaDB [LIBSYS]> desc ASORD_MARC;
 
 ```
 
-## 二、过程
-## 1.算法
-1）读取参数
-2）根据参数中的文件名，读取文件内全部信息，生成参数中指定的线程数目个字符串数组；
-3）生成生成参数中指定的线程数目个线程，并将数组分别传给每个线程；
-4）线程开始，遍历数组，根据字符串拼接成url，类似“http://book.douban.com/isbn/978-7-121-28330-7”，
-在其页面解析出class为"nbg"的标签，其"href"属性则为封面图片。
-
-## 三、使用
+## 二、步骤
 ## 1.建库
 ```
 CREATE DATABASE `LIBSYS` DEFAULT CHARACTER SET utf8mb4;
@@ -74,10 +63,9 @@ java -jar crawler-1.0.jar DB_IP USER PASSWD ISBN_FILE AMOUNT_OF_THREADS"
 java -jar crawler-1.0.jar localhost:3306 root 123456 isbn.txt 4
 ```
 
-## 四、参考文献
+## 三、参考文献
 * http://docs.oracle.com/javase/8/docs/api/
 * https://www.zhihu.com/question/21234530
 * http://blog.csdn.net/hu948162999/article/details/40372383?utm_source=tuicool&utm_medium=referral
 * http://blog.csdn.net/ku360517703/article/details/41907319
 * http://www.infoq.com/cn/news/2011/06/xxb-maven-9-package
-
