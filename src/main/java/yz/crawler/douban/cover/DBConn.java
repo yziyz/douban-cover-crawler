@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class DBConn {
     private final String DRIVER = "org.mariadb.jdbc.Driver";
-    private final String URL = "jdbc:mariadb://" + Main.IP + "/LIBSYS";
+    private final String URL = "jdbc:mariadb://" + Main.IP + "/" + Main.DB;
     private final String USER = Main.USER;
     private final String PASSWD = Main.PASSWD;
     private Connection conn = null;

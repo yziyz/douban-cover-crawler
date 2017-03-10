@@ -28,11 +28,11 @@ MariaDB [LIBSYS]> desc ASORD_MARC;
 ## 二、步骤
 ## 1.建库
 ```
-CREATE DATABASE `LIBSYS` DEFAULT CHARACTER SET utf8mb4;
+CREATE DATABASE `TEST` DEFAULT CHARACTER SET utf8mb4;
 ```
 ## 2.建表
 ```
-CREATE TABLE LIBSYS.IMAGE(ID INT AUTO_INCREMENT PRIMARY KEY,M_ISBN VARCHAR(40),URL VARCHAR(60));
+CREATE TABLE TEST.IMAGE(ID INT AUTO_INCREMENT PRIMARY KEY,M_ISBN VARCHAR(40),URL VARCHAR(60));
 ```
 ## 3.准备txt文件
 准备txt文件，每行为ISBN号，如：
@@ -48,19 +48,24 @@ CREATE TABLE LIBSYS.IMAGE(ID INT AUTO_INCREMENT PRIMARY KEY,M_ISBN VARCHAR(40),U
 7-81045-865-5
 7-81053-339-8
 ```
+## 5.编译程序
+```
+mvn package
+```
 ## 4.运行程序
 ```
-java -jar crawler-1.0.jar DB_IP USER PASSWD ISBN_FILE AMOUNT_OF_THREADS"
+java -jar crawler-1.0.jar DB_IP DB USER PASSWD ISBN_FILE AMOUNT_OF_THREADS
 ```
 需要指定参数为
 * DB_IP：数据库地址
+* DB：数据库名
 * USER：数据库用户名
 * PASSWD：密码
 * ISBN_FILE：文本文件路径
 * AMOUNT_OF_THREADS：线程数
 例如：
 ```
-java -jar crawler-1.0.jar localhost:3306 root 123456 isbn.txt 4
+java -jar crawler-1.0.jar localhost:3306 TEST root 123456 isbn.txt 4
 ```
 
 ## 三、参考文献

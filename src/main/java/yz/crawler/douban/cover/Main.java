@@ -9,22 +9,24 @@ public class Main {
     public static String IP;
     public static String USER;
     public static String PASSWD;
+    public static String DB;
     public static String ISBN_FILE;
     public static int AMOUNT_OF_THREADS;
 
     public static void main(String[] args) {
         //读取参数
         try {
-            if (args.length != 5) {
-                System.out.println("Useage: java -jar crawler-1.0.jar DB_IP USER PASSWD ISBN_FILE AMOUNT_OF_THREADS");
+            if (args.length != 6) {
+                System.out.println("Useage: java -jar crawler-1.0.jar DB_IP DB USER PASSWD ISBN_FILE AMOUNT_OF_THREADS");
                 System.out.println("Please retry, now exit.");
                 return;
             } else {
                 IP = args[0];
-                USER = args[1];
-                PASSWD = args[2];
-                ISBN_FILE = args[3];
-                AMOUNT_OF_THREADS = Integer.valueOf(args[4]);
+                DB = args[1];
+                USER = args[2];
+                PASSWD = args[3];
+                ISBN_FILE = args[4];
+                AMOUNT_OF_THREADS = Integer.valueOf(args[5]);
             }
         } catch (Exception e) {
             e.printStackTrace();
