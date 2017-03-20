@@ -1,8 +1,6 @@
 package yz.crawler.douban.cover;
 
-/**
- * Created by yz on 12/31/16.
- */
+import java.util.Stack;
 
 public class Main {
 
@@ -12,6 +10,8 @@ public class Main {
     public static String DB;
     public static String ISBN_FILE;
     public static int AMOUNT_OF_THREADS;
+    public static Stack<String> stringStack;
+    public static DBConn dbConn;
 
     public static void main(String[] args) {
         //读取参数
@@ -33,11 +33,17 @@ public class Main {
             System.out.println("Please retry.");
             return;
         }
-        //读取文件，返回二位数组
-        String[][] strings = Util.getArrayOfISBN();
-        //将数组分别分配给线程
+
+        //初始化isbn栈
+        stringStack = new Stack<String>();
+        //将isbn圧入栈中
+        Util.pushAllISBN();
+        System.out.println("ISBN amount: " + String.valueOf(stringStack.size() + ";"));
+        //初始化数据库连接
+        dbConn = new DBConn();
+        System.out.println("DB connected;");
         for (int i = 0; i < Main.AMOUNT_OF_THREADS; i++) {
-            Worker worker = new Worker("T_" + String.valueOf(i + 1), strings[i]);
+            Worker worker = new Worker("T_" + String.valueOf(i + 1));
             worker.start();
         }
     }

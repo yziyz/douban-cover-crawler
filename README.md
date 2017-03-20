@@ -7,20 +7,20 @@
 ```$xslt
 MariaDB [LIBSYS]> desc ASORD_MARC;
 +-------------------+--------------+------+-----+---------+-------+
-| Field             | Type         | Null | Key | Default | Extra |
+| Field    | Type| Null | Key | Default | Extra |
 +-------------------+--------------+------+-----+---------+-------+
-| M_ISBN            | varchar(40)  | YES  |     | NULL    |       |
+| M_ISBN   | varchar(40)  | YES  |     | NULL    |       |
 +-------------------+--------------+------+-----+---------+-------+
 ```
 ### 输出
 保存表中所有记录对应的封面图片的URL，以如下格式保存在表中；
 ```$xslt
 +--------+-------------+------+-----+---------+----------------+
-| Field  | Type        | Null | Key | Default | Extra          |
+| Field  | Type        | Null | Key | Default | Extra |
 +--------+-------------+------+-----+---------+----------------+
 | ID     | int(11)     | NO   | PRI | NULL    | auto_increment |
-| M_ISBN | varchar(40) | YES  |     | NULL    |                |
-| URL    | varchar(60) | YES  |     | NULL    |                |
+| M_ISBN | varchar(40) | YES  |     | NULL    |       |
+| URL    | varchar(60) | YES  |     | NULL    |       |
 +--------+-------------+------+-----+---------+----------------+
 
 ```
@@ -32,7 +32,7 @@ CREATE DATABASE `TEST` DEFAULT CHARACTER SET utf8mb4;
 ```
 ## 2.建表
 ```
-CREATE TABLE TEST.IMAGE(ID INT AUTO_INCREMENT PRIMARY KEY,M_ISBN VARCHAR(40),URL VARCHAR(60));
+CREATE TABLE TEST.IMAGE(ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,M_ISBN VARCHAR(40),URL VARCHAR(60));
 ```
 ## 3.准备txt文件
 准备txt文件，每行为ISBN号，如：
@@ -65,9 +65,17 @@ java -jar crawler-1.0.jar DB_IP DB USER PASSWD ISBN_FILE AMOUNT_OF_THREADS
 * AMOUNT_OF_THREADS：线程数
 例如：
 ```
-java -jar crawler-1.0.jar localhost:3306 TEST root 123456 isbn.txt 4
+java -jar crawler-1.0.jar localhost:3306 TEST root 123456 isbn.txt 1
 ```
-
+显示如下：
+```
+Starting T_1
+  T_1 : 1194867 : 978-7-112-18558-0     
+  T_1 : 1194866 : 978-7-5074-3034-9     
+  T_1 : 1194865 : 978-7-300-21983-7     
+  T_1 : 1194864 : 978-7-5136-3987-3     
+  T_1 : 1194863 : 978-7-5429-4319-4
+```
 ## 三、参考文献
 * http://docs.oracle.com/javase/8/docs/api/
 * https://www.zhihu.com/question/21234530
