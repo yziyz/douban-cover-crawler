@@ -30,17 +30,17 @@ public class Worker implements Runnable {
             String isbn = Main.stringStack.pop();
             if (getImage(isbn) == 1) {
                 //打印到屏幕
-                System.out.printf("%5s : %7s : %-40s\n", this.threadName, Main.stringStack.size(), isbn);
+                System.out.printf("%-5s : %7s : %-40s\n", this.threadName, Main.stringStack.size(), isbn);
             } else {
                 //打印到屏幕
-                System.out.printf("Error : %s\n", isbn);
+                System.err.printf("Error : %s\n", isbn);
             }
         }
     }
 
     private int getImage(String isbn) {
         int status = 0;
-        String url = "http://book.douban.com/isbn/9787515304113";// + isbn;
+        String url = "http://book.douban.com/isbn/" + isbn;
         //try 5 times
         for (int i = 0; i < 5; i++) {
             try {
@@ -70,8 +70,7 @@ public class Worker implements Runnable {
                     Thread.sleep(10000);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-                System.exit(0);
+                //e.printStackTrace();
             }
         }
         return status;
