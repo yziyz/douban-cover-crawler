@@ -42,17 +42,14 @@ public class Worker implements Runnable {
         int status = 0;
         String url = "http://book.douban.com/isbn/" + isbn;
         //try 5 times
+        Document doc;
+        Elements elements;
         for (int i = 0; i < 5; i++) {
             try {
-                Document doc;
-                Elements elements;
                 doc = Jsoup.connect(url)
                         .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
                         .header("Accept-Encoding", "gzip, deflate, sdch, br")
                         .header("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4")
-                        .header("Connection", "keep-alive")
-                        .header("Host", "book.douban.com")
-                        .header("Upgrade-Insecure-Requests", "1")
                         .header("User-Agent", UserAgent.getUserAgent())
                         .get();
                 //按照class获取封面图片所在的a标签
@@ -66,13 +63,17 @@ public class Worker implements Runnable {
                     //等待10秒
                     Thread.sleep(10000);
                     break;
-                } else {
-                    Thread.sleep(10000);
                 }
             } catch (Exception e) {
-                //e.printStackTrace();
+                e.printStackTrace();
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
             }
         }
         return status;
+        //如何根据isbn得到图书信息
     }
 }

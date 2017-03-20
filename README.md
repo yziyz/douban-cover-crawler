@@ -65,7 +65,7 @@ java -jar crawler-1.0.jar DB_IP DB USER PASSWD ISBN_FILE AMOUNT_OF_THREADS
 * AMOUNT_OF_THREADS：线程数
 例如：
 ```
-java -jar crawler-1.0.jar localhost:3306 TEST root 123456 isbn.txt 1
+java -jar crawler-1.0.jar localhost:3306 TEST root 123456 ~/isbn.txt 1
 ```
 显示如下：
 ```
